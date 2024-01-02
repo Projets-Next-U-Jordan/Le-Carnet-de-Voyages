@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
     resources :trips do
       collection do
+        post "create_ajax" => :create_ajax
+        put "update_ajax/:id" => :update_ajax
         delete "destroy_ajax/:id" => :destroy_ajax
       end
     end
