@@ -12,11 +12,17 @@ Rails.application.routes.draw do
         get "test2" => :test
       end
     end
-    resources :trips
+    resources :trips do
+      collection do
+        delete "destroy_ajax/:id" => :destroy_ajax
+      end
+    end
   end
 
   root "home#index"
 
   get "/trips" => "trips#index", as: :index_trips
+  get "/trips/new" => "trips#new", as: :new_trip
+  get "/trips/edit/:id" => "trips#edit", as: :edit_trip
 
 end

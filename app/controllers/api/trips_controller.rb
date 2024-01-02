@@ -1,8 +1,7 @@
 module Api
     class TripsController < ApplicationController
-    	before_action :set_trip, only: [:show, :update, :destroy]
+    	before_action :set_trip, only: [:show, :update, :destroy, :destroy_ajax]
   
-    	# GET /trips
     	def index
         	@trips = Trip.all
         	render json: @trips
@@ -16,9 +15,9 @@ module Api
         	@trip = Trip.new(trip_params)
   
         	if @trip.save
-          	render json: @trip, status: :created
+          		render json: @trip, status: :created
         	else
-          	render json: @trip.errors, status: :unprocessable_entity
+          		render json: @trip.errors, status: :unprocessable_entity
         	end
       	end
 
@@ -33,6 +32,16 @@ module Api
 		def destroy
     		@trip.destroy
 		end
+
+		def destroy_ajax
+			# TODO - TROUVER UN MOYEN DE METTRE UN DELAI AVANT DE RELOAD LA PAGE
+    		@trip.destroy
+			respond_to do |format|
+				format.html { head :no_content }
+				format.json { head :no_content }
+				format.js { render js: 'window.location.reload();' }
+			end
+		end
   
 		private
   
@@ -41,7 +50,7 @@ module Api
     	end
   
     	def trip_params
-    		params.require(:trip).permit(:name, :description, :start_date, :end_date, :user_id)
+    		params.require(:trip).permit(:destination, :description, :start_date, :end_date, :user_id)
     	end
 	end
 end
