@@ -19,7 +19,7 @@
                                 <li class="list-group-item">Retour: <%= l(trip.end_date) %></li>
                             </ul>
                               <div class="card-footer text-body-secondary d-flex justify-content-end">
-                                <%= form_with url: api_trip_path(trip), method: :delete, class: 'd-inline ms-2' do %>
+                                <%= form_with url: "/api/trips/destroy_ajax/#{trip.id}", method: :delete, class: 'd-inline ms-2' do %>
                                     <%= button_tag type: 'submit', data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do %>
                                         <i class="bi bi-trash-fill"></i>
                                     <% end %>
