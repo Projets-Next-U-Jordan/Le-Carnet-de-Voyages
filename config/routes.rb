@@ -17,4 +17,6 @@ Rails.application.routes.draw do
 
   root "home#index"
 
+  get "/trips" => "trips#index", as: :index_trips
+
 end
