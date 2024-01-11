@@ -8,8 +8,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users do
       collection do
-        get "test" => :test
-        get "test2" => :test
+        post "create_ajax" => :create_ajax
       end
     end
     resources :trips do
@@ -26,5 +25,8 @@ Rails.application.routes.draw do
   get "/trips" => "trips#index", as: :index_trips
   get "/trips/new" => "trips#new", as: :new_trip
   get "/trips/edit/:id" => "trips#edit", as: :edit_trip
+
+  get "/users" => "users#index", as: :index_users
+  get "/users/new" => "users#new", as: :new_user
 
 end

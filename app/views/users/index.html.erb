@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="d-flex align-items-center gap-2">
+        <h2 >Tous les Utilisateurs</h2>
+        <%= link_to '+ Créer', new_user_path, class: 'btn btn-primary ml-2' %>
+    </div>
+    <div class="col-md-12">
+        <div class="container-fluid text-center my-5">
+            <% if @users.empty? %>
+                <h3 class="text-center">Aucun utilisateur pour le moment</h3>
+            <% else %>
+                <div class="row g-4">
+                    <% @users.each do |user| %>
+                        <div class="col-md-3 d-flex justify-content-center">
+                            <div class="card text-right" style="width: 18rem;">
+                                <h5 class="card-header">
+                                    <%= user.name %>
+                                </h5>
+                                <%= image_tag 'no_profile.webp', class: 'card-img-top', alt: 'No Profile Picture' %>
+                                <p class="mb-0"><%= user.email %></p>
+                                <div class="card-footer text-body-secondary d-flex justify-content-end">
+
+                                    <span><%= user.created_at %>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
